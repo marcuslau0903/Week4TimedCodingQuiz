@@ -1,0 +1,55 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: space-between;
+    padding: 20px 30px;
+}
+
+h1 {
+    text-align: center;
+    left: 50%  
+}
+p {
+    text-align: center;
+    /* text-align: justify; */
+    margin: 5px 150px;
+    padding: 10px;
+}
+
+#startBtn {
+    padding: 15px 35px;
+    margin:50px auto;
+    display:block;
+    font-weight: bold;
+    font-size: larger;
+    background-color: blueviolet;
+    color: white;
+    border-style: none;
+    border-radius: 8px;
+}
+
+#submitForm {
+    padding: 20px;
+    line-height: 30px;
+    display: none;
+}
+
+#submitBtn {
+    margin-left: 15px;
+    padding: 10px;
+    background-color: blueviolet;
+    color: white;
+    border-style: none;
+    border-radius: 8px;
+    font-size: medium;
+}
+
+#nameInput {
+    padding: 7px;
+}
