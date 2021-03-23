@@ -89,7 +89,7 @@ answerBtn4.innerText = currentQuestion.choice4
 }
 
 getNextQuestion = () => {
-    // const questionsIndex = questionNumber + 1
+    // var questionsIndex = questionNumber += 1
     currentQuestion = questionsArray[questionsIndex]
     question.innerText = currentQuestion.Question
     answerBtn1.innerText = currentQuestion.choice1
@@ -100,17 +100,15 @@ getNextQuestion = () => {
 
 // function for each item in an Array 
 answerButton.forEach(element => {
-// adding event listener to each button
-    element.addEventListener("click", event => {
-        if (event.target.innerText === currentQuestion.answer) {
-            response.innerText = "correct!"
-            response.classList.remove("hide")
-        }
-        else {
-            response.innerText = "wrong!"
-            response.classList.remove("hide")
-        }
+    // adding event listener to each button
+        element.addEventListener("click", event => {
+            if (event.target.innerText === currentQuestion.answer) {
+                response.innerText = "correct!"
+                response.classList.remove("hide")
+            }
+            else {
+                response.innerText = "wrong!"
+                response.classList.remove("hide")
+            }
+       })
     })
-     getNextQuestion()   
-})
-
