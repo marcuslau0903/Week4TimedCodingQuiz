@@ -111,6 +111,6 @@ answerButton.forEach(element => {
             response.classList.remove("hide")
         }
     })
-     // getNextQuestion()   
+     getNextQuestion()   
 })
 
