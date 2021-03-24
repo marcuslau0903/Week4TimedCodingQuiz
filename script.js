@@ -1,7 +1,8 @@
 // Global Memory******
 let counter = 60
 const timeStart = document.getElementById("seconds")
-const introSection = document.getElementById("IntroSection")
+const container = document.getElementById("container")
+const introSection = document.getElementById("introSection")
 const startButton = document.getElementById("startBtn")
 const questionContainer = document.getElementById("questionContainer")
 const questionElement = document.getElementById("question")
@@ -14,46 +15,31 @@ let questionNumber = 0
 
 
 
-let questionsArray = [ 
+const questionsArray = [ 
     {
         Question: "What's the biggest animal in the world?",
-        choice1: "The blue whale",
-        choice2: "Elephant",
-        choice3: "Chinese Salamander",
-        choice4: "Giraffe",
-        answer: "The blue whale"
+        choices: ["The blue whale","Elephant", "Chinese Salamander","Giraffe"],
+        correctAnswer: "The blue whale"
     },
     {
         Question: "Which country is brie cheese originally from?",
-        choice1: "Denmark",
-        choice2: "Italy",
-        choice3: "Finland",
-        choice4: "France",
-        answer: "France"
+        choices: ["Denmark","Italy","Finland","France"],
+        correctAnswer: "France"
     },
     {
         Question: "What is the capital of Iceland?",
-        choice1: "KÓPAVOGUR",
-        choice2: "HAFNARFJÖRÐUR",
-        choice3: "REYKJAVÍK",
-        choice4: "AKUREYRI",
-        answer: "REYKJAVÍK"
+        choices: ["KÓPAVOGUR","HAFNARFJÖRÐUR","REYKJAVÍK","AKUREYRI"],
+        correctAnswer: "REYKJAVÍK"
     },
     {
         Question: "Which city had the first ever fashion week?",
-        choice1: "paris",
-        choice2: "New York",
-        choice3: "London",
-        choice4: "Milan",
-        answer: "New York"
+        choices: ["paris","New York","London","Milan"],
+        correctAnswer: "New York"
     },
     {
         Question: "How many minutes in a game of rugby league?",
-        choice1: "90 minutes",
-        choice2: "80 minutes",
-        choice3: "70 minutes",
-        choice4: "75 minutes",
-        answer: "80 minutes"
+        choices: ["90 minutes","80 minutes","70 minutes","75 minutes"],
+        correctAnswer: "80 minutes"
     },
 ]
 
@@ -69,46 +55,93 @@ let questionsArray = [
 // } 
 // )
 
+
+
+const createChoices = (choices) => { 
+    const parentDiv = document.createElement("div")
+    parentDiv.setAttribute("class","btnGrid")
+    parentDiv.setAttribute("id","answerBtns")
+
+const createChoiceAndAppend = (choice) => {
+    const button = document.createElement("button")
+    button.setAttribute("class","btn" )
+    button.setAttribute("data-answer",choice)
+    button.textContent = choice;
+
+    parentDiv.appendChild(button)
+}
+    choices.forEach(createChoiceAndAppend)
+    return parentDiv
+}
+
+
+const createQuestion = (question) => {
+    const divContainer = document.createElement("div")
+    divContainer.setAttribute("id","questionContainer")
+    divContainer.setAttribute("data-answer", question.correctAnswer)
+
+    const h2 = document.createElement("h2")
+    h2.setAttribute("id","question")
+    h2.textContent = question.Question;
+
+    //create choices
+    const choices = createChoices(question.choices)
+    divContainer.append(h2,choices)
+    container.append(divContainer)
+}
+
+
+
+const startQuiz = () => {
+container.removeChild (introSection)
+// create question container
+//remove the start button container
+//append questionContainer to the DOM
+createQuestion(questionsArray[0])
+}
+
+
 startButton.addEventListener("click",startQuiz) 
 
-function startQuiz() {
-    introSection.style.display="none"
-    questionContainer.classList.remove("hide")
-    availableQuestions =[...questionsArray]
-    getNewQuestion()
-}
 
-getNewQuestion = () => { 
-const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
-currentQuestion = questionsArray[questionsIndex]
-question.innerText = currentQuestion.Question
-answerBtn1.innerText = currentQuestion.choice1
-answerBtn2.innerText = currentQuestion.choice2
-answerBtn3.innerText = currentQuestion.choice3
-answerBtn4.innerText = currentQuestion.choice4
-}
+// function startQuiz() {
+//     introSection.style.display="none"
+//     questionContainer.classList.remove("hide")
+//     availableQuestions =[...questionsArray]
+//     getNewQuestion()
+// }
 
-getNextQuestion = () => {
-    // var questionsIndex = questionNumber += 1
-    currentQuestion = questionsArray[questionsIndex]
-    question.innerText = currentQuestion.Question
-    answerBtn1.innerText = currentQuestion.choice1
-    answerBtn2.innerText = currentQuestion.choice2
-    answerBtn3.innerText = currentQuestion.choice3
-    answerBtn4.innerText = currentQuestion.choice4
-}
+// getNewQuestion = () => { 
+// const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
+// currentQuestion = questionsArray[questionsIndex]
+// question.innerText = currentQuestion.Question
+// answerBtn1.innerText = currentQuestion.choice1
+// answerBtn2.innerText = currentQuestion.choice2
+// answerBtn3.innerText = currentQuestion.choice3
+// answerBtn4.innerText = currentQuestion.choice4
+// }
 
-// function for each item in an Array 
-answerButton.forEach(element => {
-    // adding event listener to each button
-        element.addEventListener("click", event => {
-            if (event.target.innerText === currentQuestion.answer) {
-                response.innerText = "correct!"
-                response.classList.remove("hide")
-            }
-            else {
-                response.innerText = "wrong!"
-                response.classList.remove("hide")
-            }
-       })
-    })
+// getNextQuestion = () => {
+//     // var questionsIndex = questionNumber += 1
+//     currentQuestion = questionsArray[questionsIndex]
+//     question.innerText = currentQuestion.Question
+//     answerBtn1.innerText = currentQuestion.choice1
+//     answerBtn2.innerText = currentQuestion.choice2
+//     answerBtn3.innerText = currentQuestion.choice3
+//     answerBtn4.innerText = currentQuestion.choice4
+// }
+
+// // function for each item in an Array 
+// answerButton.forEach(element => {
+//     // adding event listener to each button
+//         element.addEventListener("click", event => {
+//             if (event.target.innerText === currentQuestion.correctAnswer) {
+//                 response.innerText = "correct!"
+//                 response.classList.remove("hide")
+//             }
+//             else {
+//                 response.innerText = "wrong!"
+//                 response.classList.remove("hide")
+//             }
+//        })
+//     })
