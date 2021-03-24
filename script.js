@@ -44,11 +44,10 @@ const questionsArray = [
 ]
 
 // startBtn.addEventListener("click", function() {
-//     // timeStart.innerHTML = 60
-//     // const timeTicking = setInterval(() => {
-//     // counter--
-//     // timeStart.innerHTML = counter
-//     // }, 1000);
+     // timeStart.innerHTML = 60
+     // const timeTicking = setInterval(() => {
+     // counter--     // timeStart.innerHTML = counter
+     // }, 1000);
 
 // // introSection.style.display ="none"
 // startButton.classList.add("hide")
@@ -91,7 +90,6 @@ const createQuestion = (question) => {
 }
 
 
-
 const startQuiz = () => {
 container.removeChild (introSection)
 // create question container
@@ -99,7 +97,6 @@ container.removeChild (introSection)
 //append questionContainer to the DOM
 createQuestion(questionsArray[0])
 }
-
 
 startButton.addEventListener("click",startQuiz) 
 
