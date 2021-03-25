@@ -1,20 +1,17 @@
 // Global Memory******
-let counter = 60
-const timeStart = document.getElementById("seconds")
+let secondsLeft = 10
+let questionNumber = 0
+let availableQuestions = []
+let currentQuestion = {}
+const divTimer = document.getElementById("timer")
 const container = document.getElementById("container")
 const introSection = document.getElementById("introSection")
 const startButton = document.getElementById("startBtn")
 const questionContainer = document.getElementById("questionContainer")
 const questionElement = document.getElementById("question")
+// querySelectorAll finds all elements with the class and returns into an Array
 const answerButton = document.querySelectorAll(".btn")
 const response = document.getElementById("response")
-// querySelectorAll finds all elements with the class and returns into an Array
-let availableQuestions = []
-let currentQuestion = {}
-let questionNumber = 0
-
-
-
 const questionsArray = [ 
     {
         Question: "What's the biggest animal in the world?",
@@ -43,18 +40,32 @@ const questionsArray = [
     },
 ]
 
-// startBtn.addEventListener("click", function() {
-     // timeStart.innerHTML = 60
-     // const timeTicking = setInterval(() => {
-     // counter--     // timeStart.innerHTML = counter
-     // }, 1000);
+const setTime = function() {
+    const callback = function () {
+        secondsLeft--
+        divTimer.textContent = "Time Left:" + " " + secondsLeft 
 
-// // introSection.style.display ="none"
-// startButton.classList.add("hide")
-// } 
-// )
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval)
+        }
+    }
+    const timerInterval = setInterval(callback,1000)
+}
 
+const createQuestion = (question) => {
+    const divContainer = document.createElement("div")
+    divContainer.setAttribute("id","questionContainer")
+    divContainer.setAttribute("data-answer", question.correctAnswer)
 
+    const h2 = document.createElement("h2")
+    h2.setAttribute("id","question")
+    h2.textContent = question.Question;
+
+    //create choices
+    const choices = createChoices(question.choices)
+    divContainer.append(h2,choices)
+    container.append(divContainer)
+}
 
 const createChoices = (choices) => { 
     const parentDiv = document.createElement("div")
@@ -73,40 +84,14 @@ const createChoiceAndAppend = (choice) => {
     return parentDiv
 }
 
-
-const createQuestion = (question) => {
-    const divContainer = document.createElement("div")
-    divContainer.setAttribute("id","questionContainer")
-    divContainer.setAttribute("data-answer", question.correctAnswer)
-
-    const h2 = document.createElement("h2")
-    h2.setAttribute("id","question")
-    h2.textContent = question.Question;
-
-    //create choices
-    const choices = createChoices(question.choices)
-    divContainer.append(h2,choices)
-    container.append(divContainer)
-}
-
-
 const startQuiz = () => {
 container.removeChild (introSection)
-// create question container
-//remove the start button container
-//append questionContainer to the DOM
+setTime()
 createQuestion(questionsArray[0])
 }
 
 startButton.addEventListener("click",startQuiz) 
 
-
-// function startQuiz() {
-//     introSection.style.display="none"
-//     questionContainer.classList.remove("hide")
-//     availableQuestions =[...questionsArray]
-//     getNewQuestion()
-// }
 
 // getNewQuestion = () => { 
 // const questionsIndex = Math.floor(Math.random() * availableQuestions.length)

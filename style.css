@@ -37,15 +37,19 @@ p {
 a {
     text-decoration: none;
     color:blueviolet;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
+    border:2px solid blueviolet;
+    padding: 10px 20px;
+
+
 }
 
 #timer {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     color: blueviolet;
     font-weight: bolder;
     border:2px solid blueviolet;
-    padding: 10px 20px;
+    padding: 8px 15px;
     margin-right: 2rem;
 }
 
@@ -96,13 +100,13 @@ a {
     text-decoration: overline;
 }
 
-.container {
+#container {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-size: 1.5rem;
-}
+} 
 
 .btnGrid {
     display: grid;
@@ -124,8 +128,4 @@ a {
 .btn:hover {
     border-color: yellow;
     border-width: 3px;
-}
-
-.hide {
-    display: none;
 }
