@@ -42,9 +42,6 @@ const questionsArray = [
 
 
 const handleChoiceClicked = (event) => {
-    document.getElementById("questionContainer").remove();
-    questionNumber++;
-    createQuestion(questionsArray[questionNumber])
     if ((questionNumber + 1) >= questionsArray.length) {
         // We have reached the end of our quiz...
     } else {
@@ -91,7 +88,7 @@ const createChoiceAndAppend = (choice) => {
     button.setAttribute("class","btn" )
     button.setAttribute("data-answer",choice)
     button.textContent = choice;
-
+    button.addEventListener("click", handleChoiceClicked); 
     parentDiv.appendChild(button)
 }
     choices.forEach(createChoiceAndAppend)
@@ -105,7 +102,7 @@ createQuestion(questionsArray[0])
 }
 
 startButton.addEventListener("click",startQuiz)
-button.addEventListener("click", handleChoiceClicked); 
+
 
 
 
