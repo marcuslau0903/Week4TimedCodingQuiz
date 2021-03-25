@@ -11,7 +11,7 @@ const questionContainer = document.getElementById("questionContainer")
 const questionElement = document.getElementById("question")
 // querySelectorAll finds all elements with the class and returns into an Array
 const answerButton = document.querySelectorAll(".btn")
-const response = document.getElementById("response")
+const response = document.getElementById("response") 
 const questionsArray = [ 
     {
         Question: "What's the biggest animal in the world?",
@@ -40,6 +40,20 @@ const questionsArray = [
     },
 ]
 
+
+const handleChoiceClicked = (event) => {
+    document.getElementById("questionContainer").remove();
+    questionNumber++;
+    createQuestion(questionsArray[questionNumber])
+    if ((questionNumber + 1) >= questionsArray.length) {
+        // We have reached the end of our quiz...
+    } else {
+        document.getElementById("questionContainer").remove();
+        questionNumber++;
+        createQuestion(questionsArray[questionNumber]);
+    }
+};
+
 const setTime = function() {
     const callback = function () {
         secondsLeft--
@@ -64,7 +78,7 @@ const createQuestion = (question) => {
     //create choices
     const choices = createChoices(question.choices)
     divContainer.append(h2,choices)
-    container.append(divContainer)
+    container.append(divContainer)  
 }
 
 const createChoices = (choices) => { 
@@ -90,18 +104,10 @@ setTime()
 createQuestion(questionsArray[0])
 }
 
-startButton.addEventListener("click",startQuiz) 
+startButton.addEventListener("click",startQuiz)
+button.addEventListener("click", handleChoiceClicked); 
 
 
-// getNewQuestion = () => { 
-// const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
-// currentQuestion = questionsArray[questionsIndex]
-// question.innerText = currentQuestion.Question
-// answerBtn1.innerText = currentQuestion.choice1
-// answerBtn2.innerText = currentQuestion.choice2
-// answerBtn3.innerText = currentQuestion.choice3
-// answerBtn4.innerText = currentQuestion.choice4
-// }
 
 // getNextQuestion = () => {
 //     // var questionsIndex = questionNumber += 1
