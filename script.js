@@ -59,6 +59,7 @@ const endOfQuiz = function() {
 
     const form = document.createElement("form")
     form.setAttribute("id","form")
+
     const h2 = document.createElement("h2")
     h2.textContent = "All Done!"
 
@@ -71,6 +72,13 @@ const endOfQuiz = function() {
 
     const submitButton = document.createElement("a")
     submitButton.setAttribute("id","submitBtn")
+
+    formDivContainer.appendChild(form);
+    form.appendChild(h2)
+    form.appendChild(h3)
+    document.getElementById("container").appendChild(formDivContainer)
+
+    return formDivContainer
 }
     
 const setTime = function() {

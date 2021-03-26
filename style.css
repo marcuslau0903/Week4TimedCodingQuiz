@@ -24,7 +24,7 @@ header {
 h1, h2{
     text-align: center;
     color: white;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 h4 {
@@ -36,6 +36,7 @@ form {
     color: white;
     font-size: 1.2rem;
 }
+
 p {
     text-align: center;
     margin: 5px 150px;
@@ -44,6 +45,7 @@ p {
     font-size: 1.2rem;
     color: white;
 }
+
 a {
     text-decoration: none;
     color:blueviolet;
@@ -55,7 +57,7 @@ a {
 }
 
 #timer {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: blueviolet;
     font-weight: bolder;
     border:2px solid blueviolet;
