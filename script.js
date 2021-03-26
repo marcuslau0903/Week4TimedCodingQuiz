@@ -1,5 +1,5 @@
 // Global Memory******
-let secondsLeft = 10
+let secondsLeft = 60
 let questionNumber = 0
 let availableQuestions = []
 let currentQuestion = {}
@@ -66,16 +66,25 @@ const endOfQuiz = function() {
     const h4 = document.createElement("h4")
     h4.textContent = "Your final score is"
 
+    const label = document.createElement("label")
+    label.innerText = "Enter Initials: "
+
     const inputText = document.createElement("input")
     inputText.setAttribute("type","text")
-    inputText.textContent = "Enter Initials"
+    inputText.setAttribute("id", "nameInput" ) 
+    inputText.setAttribute("placeholder", "your name here")
 
     const submitButton = document.createElement("a")
     submitButton.setAttribute("id","submitBtn")
+    submitButton.setAttribute("href","highscores.html")
+    submitButton.innerText = "submit"
 
     formDivContainer.appendChild(form);
     form.appendChild(h2)
-    form.appendChild(h3)
+    form.appendChild(h4)
+    form.appendChild(label)
+    label.appendChild(inputText)
+    form.appendChild(submitButton)
     document.getElementById("container").appendChild(formDivContainer)
 
     return formDivContainer
