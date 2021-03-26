@@ -1,14 +1,13 @@
 // Global Memory******
-let secondsLeft = 60
+let secondsLeft = 5
 let questionNumber = 0
+let score = 0
 const divTimer = document.getElementById("timer")
 const container = document.getElementById("container")
 const introSection = document.getElementById("introSection")
 const startButton = document.getElementById("startBtn")
 const questionContainer = document.getElementById("questionContainer")
 const questionElement = document.getElementById("question")
-// querySelectorAll finds all elements with the class and returns into an Array
-const answerButton = document.querySelectorAll(".btn")
 const submitButton = document.getElementById("submitBtn")
 const response = document.getElementById("response") 
 const questionsArray = [ 
@@ -29,7 +28,7 @@ const questionsArray = [
     },
     {
         Question: "Which city had the first ever fashion week?",
-        choices: ["paris","New York","London","Milan"],
+        choices: ["Paris","New York","London","Milan"],
         correctAnswer: "New York"
     },
     {
@@ -51,7 +50,9 @@ const setTime = function() {
             divTimer.textContent = "Time Left:" + " " + secondsLeft 
     
             if (secondsLeft === 0) {
-                clearInterval(timerInterval)
+            clearInterval(timerInterval)
+                document.getElementById("questionContainer").remove()
+                endOfQuiz()
             }
         }
         const timerInterval = setInterval(callback,1000)
@@ -90,20 +91,20 @@ const createChoices = (choices) => {
     }
 
 const handleChoiceClicked = (event) => {
+    var clicked = event.target.innerText
+    var correct = questionsArray[questionNumber].correctAnswer
     if ((questionNumber + 1) >= questionsArray.length) {
         // reached the end of quiz
+    validateChoices(clicked,correct)
         document.getElementById("questionContainer").remove()
         endOfQuiz()
     } else {
         document.getElementById("questionContainer").remove();
+        validateChoices(clicked,correct)
         questionNumber++;
         createQuestion(questionsArray[questionNumber]);
     }
 };
-
-const CalculateTotalScore = () => {
-
-}
 
 const endOfQuiz = function() {
     const formDivContainer = document.createElement("div")
@@ -113,7 +114,7 @@ const endOfQuiz = function() {
     form.setAttribute("id","form")
 
     const h2 = document.createElement("h2")
-    h2.textContent = "All Done!"
+    h2.textContent = "End of Quiz!"
 
     const h4 = document.createElement("h4")
     h4.textContent = "Your final score is"
@@ -142,24 +143,13 @@ const endOfQuiz = function() {
     return formDivContainer
 }
 
-const validateChoices = () => {
-    // function for each item in an Array 
-    answerButton.forEach(element) => {
-    if (element.target.innerText === question.correctAnswer) {
-        // response.innerText = "correct!"
-        alert ("correct")
+const validateChoices = (clicked, correct) => { 
+    if (clicked === correct) {
+        score++
     }
     else {
-        // response.innerText = "wrong!"
-        alert ("wrong")
-        secondsLeft = secondLeft - 5;
+        secondsLeft = secondsLeft -5;
     }
-}
-
-
-const onFormSubmit = () => {
 }
 
 startButton.addEventListener("click",startQuiz)
-submitButton.addEventListener("submit",onFormSubmit)
-answerButton.addEventListener("click",validateChoices)
