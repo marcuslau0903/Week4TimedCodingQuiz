@@ -1,8 +1,6 @@
 // Global Memory******
 let secondsLeft = 60
 let questionNumber = 0
-let availableQuestions = []
-let currentQuestion = {}
 const divTimer = document.getElementById("timer")
 const container = document.getElementById("container")
 const introSection = document.getElementById("introSection")
@@ -11,6 +9,7 @@ const questionContainer = document.getElementById("questionContainer")
 const questionElement = document.getElementById("question")
 // querySelectorAll finds all elements with the class and returns into an Array
 const answerButton = document.querySelectorAll(".btn")
+const submitButton = document.getElementById("submitBtn")
 const response = document.getElementById("response") 
 const questionsArray = [ 
     {
@@ -40,10 +39,59 @@ const questionsArray = [
     },
 ]
 
+const startQuiz = () => {
+    container.removeChild (introSection)
+    setTime()
+    createQuestion(questionsArray[0])
+    }
+
+const setTime = function() {
+        const callback = function () {
+            secondsLeft--
+            divTimer.textContent = "Time Left:" + " " + secondsLeft 
+    
+            if (secondsLeft === 0) {
+                clearInterval(timerInterval)
+            }
+        }
+        const timerInterval = setInterval(callback,1000)
+    }
+
+const createQuestion = (question) => {
+        const divContainer = document.createElement("div")
+        divContainer.setAttribute("id","questionContainer")
+        divContainer.setAttribute("data-answer", question.correctAnswer)
+    
+        const h2 = document.createElement("h2")
+        h2.setAttribute("id","question")
+        h2.textContent = question.Question;
+    
+        //create choices
+        const choices = createChoices(question.choices)
+        divContainer.append(h2,choices)
+        container.append(divContainer)  
+    }
+    
+const createChoices = (choices) => { 
+        const parentDiv = document.createElement("div")
+        parentDiv.setAttribute("class","btnGrid")
+        parentDiv.setAttribute("id","answerBtns")
+    
+    const createChoiceAndAppend = (choice) => {
+        const button = document.createElement("button")
+        button.setAttribute("class","btn" )
+        button.setAttribute("data-answer",choice)
+        button.textContent = choice;
+        button.addEventListener("click", handleChoiceClicked); 
+        parentDiv.appendChild(button)
+    }
+        choices.forEach(createChoiceAndAppend)
+        return parentDiv
+    }
 
 const handleChoiceClicked = (event) => {
     if ((questionNumber + 1) >= questionsArray.length) {
-        // We have reached the end of our quiz... 
+        // reached the end of quiz
         document.getElementById("questionContainer").remove()
         endOfQuiz()
     } else {
@@ -52,6 +100,10 @@ const handleChoiceClicked = (event) => {
         createQuestion(questionsArray[questionNumber]);
     }
 };
+
+const CalculateTotalScore = () => {
+
+}
 
 const endOfQuiz = function() {
     const formDivContainer = document.createElement("div")
@@ -89,58 +141,15 @@ const endOfQuiz = function() {
 
     return formDivContainer
 }
-    
-const setTime = function() {
-    const callback = function () {
-        secondsLeft--
-        divTimer.textContent = "Time Left:" + " " + secondsLeft 
 
-        if (secondsLeft === 0) {
-            clearInterval(timerInterval)
-        }
-    }
-    const timerInterval = setInterval(callback,1000)
+const validateChoices = () => {  
 }
 
-const createQuestion = (question) => {
-    const divContainer = document.createElement("div")
-    divContainer.setAttribute("id","questionContainer")
-    divContainer.setAttribute("data-answer", question.correctAnswer)
-
-    const h2 = document.createElement("h2")
-    h2.setAttribute("id","question")
-    h2.textContent = question.Question;
-
-    //create choices
-    const choices = createChoices(question.choices)
-    divContainer.append(h2,choices)
-    container.append(divContainer)  
-}
-
-const createChoices = (choices) => { 
-    const parentDiv = document.createElement("div")
-    parentDiv.setAttribute("class","btnGrid")
-    parentDiv.setAttribute("id","answerBtns")
-
-const createChoiceAndAppend = (choice) => {
-    const button = document.createElement("button")
-    button.setAttribute("class","btn" )
-    button.setAttribute("data-answer",choice)
-    button.textContent = choice;
-    button.addEventListener("click", handleChoiceClicked); 
-    parentDiv.appendChild(button)
-}
-    choices.forEach(createChoiceAndAppend)
-    return parentDiv
-}
-
-const startQuiz = () => {
-container.removeChild (introSection)
-setTime()
-createQuestion(questionsArray[0])
+const onFormSubmit = () => {
 }
 
 startButton.addEventListener("click",startQuiz)
+submitButton.addEventListener("submit",onFormSubmit)
 
 
 
