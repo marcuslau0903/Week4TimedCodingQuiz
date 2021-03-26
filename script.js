@@ -142,39 +142,24 @@ const endOfQuiz = function() {
     return formDivContainer
 }
 
-const validateChoices = () => {  
-}
+const validateChoices = () => {
+    // function for each item in an Array 
+    answerButton.forEach(element) => {
+    if (element.target.innerText === question.correctAnswer) {
+        // response.innerText = "correct!"
+        alert ("correct")
+    }
+    else {
+        // response.innerText = "wrong!"
+        alert ("wrong")
+        secondsLeft = secondLeft - 5;
+    }
+})
+
 
 const onFormSubmit = () => {
 }
 
 startButton.addEventListener("click",startQuiz)
 submitButton.addEventListener("submit",onFormSubmit)
-
-
-
-
-// getNextQuestion = () => {
-//     // var questionsIndex = questionNumber += 1
-//     currentQuestion = questionsArray[questionsIndex]
-//     question.innerText = currentQuestion.Question
-//     answerBtn1.innerText = currentQuestion.choice1
-//     answerBtn2.innerText = currentQuestion.choice2
-//     answerBtn3.innerText = currentQuestion.choice3
-//     answerBtn4.innerText = currentQuestion.choice4
-// }
-
-// // function for each item in an Array 
-// answerButton.forEach(element => {
-//     // adding event listener to each button
-//         element.addEventListener("click", event => {
-//             if (event.target.innerText === currentQuestion.correctAnswer) {
-//                 response.innerText = "correct!"
-//                 response.classList.remove("hide")
-//             }
-//             else {
-//                 response.innerText = "wrong!"
-//                 response.classList.remove("hide")
-//             }
-//        })
-//     })
+answerButton.addEventListener("click",validateChoices)
