@@ -154,7 +154,7 @@ const validateChoices = () => {
         alert ("wrong")
         secondsLeft = secondLeft - 5;
     }
-})
+}
 
 
 const onFormSubmit = () => {
