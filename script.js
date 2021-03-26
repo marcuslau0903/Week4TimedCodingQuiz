@@ -43,7 +43,9 @@ const questionsArray = [
 
 const handleChoiceClicked = (event) => {
     if ((questionNumber + 1) >= questionsArray.length) {
-        // We have reached the end of our quiz...
+        // We have reached the end of our quiz... 
+        document.getElementById("questionContainer").remove()
+        endOfQuiz()
     } else {
         document.getElementById("questionContainer").remove();
         questionNumber++;
@@ -51,6 +53,26 @@ const handleChoiceClicked = (event) => {
     }
 };
 
+const endOfQuiz = function() {
+    const formDivContainer = document.createElement("div")
+    formDivContainer.setAttribute("id", "submitForm")
+
+    const form = document.createElement("form")
+    form.setAttribute("id","form")
+    const h2 = document.createElement("h2")
+    h2.textContent = "All Done!"
+
+    const h4 = document.createElement("h4")
+    h4.textContent = "Your final score is"
+
+    const inputText = document.createElement("input")
+    inputText.setAttribute("type","text")
+    inputText.textContent = "Enter Initials"
+
+    const submitButton = document.createElement("a")
+    submitButton.setAttribute("id","submitBtn")
+}
+    
 const setTime = function() {
     const callback = function () {
         secondsLeft--

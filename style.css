@@ -21,10 +21,20 @@ header {
     padding: 20px 30px;
 }
 
-h1 {
+h1, h2{
     text-align: center;
     color: white;
     font-size: 3rem;
+}
+
+h4 {
+    color: white;
+    font-size: 1.5rem;
+}
+
+form {
+    color: white;
+    font-size: 1.2rem;
 }
 p {
     text-align: center;
@@ -73,7 +83,7 @@ a {
 #submitForm {
     padding: 20px;
     line-height: 30px;
-    display: none;
+    text-align: center;
 }
 
 #submitBtn {
