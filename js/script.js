@@ -17,8 +17,6 @@ const form = document.createElement("form")
 const goBackBtn = document.getElementById("startBtn")
 const clearScoreBtn = document.getElementById("startBtn")
 
-
-
 const questionsArray = [ 
     {
         Question: "What's the biggest animal in the world?",
@@ -41,9 +39,26 @@ const questionsArray = [
         correctAnswer: "New York"
     },
     {
-        Question: "How many minutes in a game of rugby league?",
-        choices: ["90 minutes","80 minutes","70 minutes","75 minutes"],
-        correctAnswer: "80 minutes"
+        Question: "What's a baby rabbit called?",
+        choices: ["A Kit","Ribben","Rabbot","Kitty"],
+        correctAnswer: "A Kit"
+    },
+    {
+        Question: "How many elements are there in the periodic table?",
+        choices: ["118 elements","139 elements","98 elements","68 elements"],
+        correctAnswer: "118 elements"
+    }, {
+        Question: "It's illegal in Texas to put what on your neighbour’s Cow?",
+        choices: ["Weight","Food","Grafitti","A Sack of Potatos"],
+        correctAnswer: "Grafitti"
+    }, {
+        Question: "The average person does what thirteen times a day?",
+        choices: ["Sneeze","Cry","Jump","Laughs"],
+        correctAnswer: "Laughs"
+    }, {
+        Question: "What is the most common colour of toilet paper in France?",
+        choices: ["Blue","Yellow","Green","Pink"],
+        correctAnswer: "Pink"
     },
 ]
 
@@ -239,9 +254,7 @@ const renderLastRegistered = () => {
 //     container.appendChild(introSection)
 // // }
 
-// // const clearScores = () => {
-//     clear(highScores)
-// // }
+
 
 
 startButton.addEventListener("click",startQuiz)
