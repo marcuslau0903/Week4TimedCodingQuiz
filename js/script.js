@@ -1,5 +1,5 @@
 // Global Memory******
-let secondsLeft = 5
+let secondsLeft = 60
 let questionNumber = 0
 let score = 0
 const divTimer = document.getElementById("timer")
@@ -8,8 +8,17 @@ const introSection = document.getElementById("introSection")
 const startButton = document.getElementById("startBtn")
 const questionContainer = document.getElementById("questionContainer")
 const questionElement = document.getElementById("question")
-const submitButton = document.getElementById("submitBtn")
-const response = document.getElementById("response") 
+const submitButton = document.createElement("a")
+const inputText = document.createElement("input")
+const response = document.getElementById("response")
+const formDivContainer = document.createElement("div")
+const highScoresDiv = document.createElement ("div")
+const form = document.createElement("form")
+const goBackBtn = document.getElementById("startBtn")
+const clearScoreBtn = document.getElementById("startBtn")
+
+
+
 const questionsArray = [ 
     {
         Question: "What's the biggest animal in the world?",
@@ -44,12 +53,21 @@ const startQuiz = () => {
     createQuestion(questionsArray[0])
     }
 
+const goBack = () => {
+
+}
+
 const setTime = function() {
         const callback = function () {
             secondsLeft--
-            divTimer.textContent = "Time Left:" + " " + secondsLeft 
-    
-            if (secondsLeft === 0) {
+            if ((questionNumber + 1) >= questionsArray.length) { 
+                divTimer.textContent = "Time"
+            } else {
+                divTimer.textContent = "Time Left:" + " " + secondsLeft
+            }
+
+            if (secondsLeft <= 0) {
+            divTimer.textContent = "Time Left:" + " " + 0 
             clearInterval(timerInterval)
                 document.getElementById("questionContainer").remove()
                 endOfQuiz()
@@ -95,6 +113,7 @@ const handleChoiceClicked = (event) => {
     var correct = questionsArray[questionNumber].correctAnswer
     if ((questionNumber + 1) >= questionsArray.length) {
         // reached the end of quiz
+    score = secondsLeft
     validateChoices(clicked,correct)
         document.getElementById("questionContainer").remove()
         endOfQuiz()
@@ -107,29 +126,29 @@ const handleChoiceClicked = (event) => {
 };
 
 const endOfQuiz = function() {
-    const formDivContainer = document.createElement("div")
+    
     formDivContainer.setAttribute("id", "submitForm")
 
-    const form = document.createElement("form")
     form.setAttribute("id","form")
 
     const h2 = document.createElement("h2")
     h2.textContent = "End of Quiz!"
 
     const h4 = document.createElement("h4")
-    h4.textContent = "Your final score is"
-
+    h4.textContent = `Your final score is ${score}`
+    //need to create span ??
     const label = document.createElement("label")
     label.innerText = "Enter Initials: "
 
-    const inputText = document.createElement("input")
+    
     inputText.setAttribute("type","text")
     inputText.setAttribute("id", "nameInput" ) 
     inputText.setAttribute("placeholder", "your name here")
 
-    const submitButton = document.createElement("a")
+    
     submitButton.setAttribute("id","submitBtn")
     submitButton.setAttribute("href","highscores.html")
+    submitButton.setAttribute("type","submit")
     submitButton.innerText = "submit"
 
     formDivContainer.appendChild(form);
@@ -145,11 +164,88 @@ const endOfQuiz = function() {
 
 const validateChoices = (clicked, correct) => { 
     if (clicked === correct) {
-        score++
+        
     }
     else {
         secondsLeft = secondsLeft -5;
     }
 }
 
+const onFormSubmitClick = (e) => {
+    e.preventDefault()
+    const nameInputValue = inputText.value
+    if (nameInputValue === ""){
+        displayMessage ("error", "can't leave blank, please enter your initials")
+    } else {
+
+        localStorage.setItem(nameInputValue,score)
+        }
+        container.removeChild(formDivContainer)
+        container.appendChild(highScoresDiv)
+        renderLastRegistered()
+}
+
+// researched function (combine Key and value to array) 
+function allStorage() {
+    var archive = [],
+        keys = Object.keys(localStorage),
+        i = 0, key;
+    for (; key = keys[i]; i++) {
+        archive.push( key + ' : ' + localStorage.getItem(key));
+    }
+    return archive;
+}
+
+// credits to Meedaxa for the guidance
+const renderLastRegistered = () => {
+    const highScores = allStorage()
+    const highScoresTable = document.createElement ("div")
+    highScoresTable.setAttribute ("id","highScoresTable")
+    const h1 = document.createElement("h1")
+    h1.setAttribute("id","h2")
+    h1.innerText = "HighScores"
+    const goBackButton = document.createElement ("button")
+        goBackButton.innerText = "Go Back"
+        goBackButton.setAttribute ("id", "startBtn")
+
+        const clearButton = document.createElement ("button")
+        clearButton.innerText = "ClearScores"
+        clearButton.setAttribute ("id", "startBtn")
+
+    const table = document.createElement("table")
+    for (var i=0 ; i < highScores.length ; i++){
+        const tableRow = document.createElement("tr")
+        const tableData = document.createElement("td")
+        tableData.innerText = highScores[i]
+        
+        highScoresTable.appendChild(h1)
+        tableRow.appendChild(tableData)
+        table.appendChild(tableRow)
+        highScoresTable.appendChild(table)
+    }
+        
+        highScoresTable.appendChild(goBackButton)
+        highScoresTable.appendChild(clearButton)
+        highScoresDiv.appendChild(highScoresTable)
+
+    return highScoresDiv
+}
+
+// const displayHighScores = () => {
+// }
+
+// // const goBack = () => {
+//     container.removeChild(highScoresDiv)
+//     container.appendChild(introSection)
+// // }
+
+// // const clearScores = () => {
+//     clear(highScores)
+// // }
+
+
 startButton.addEventListener("click",startQuiz)
+submitButton.addEventListener("click",(e)=>onFormSubmitClick(e))
+// clearButton.addEventListener("click",clearScores)
+// goBackButton.addEventListener("click",goBack)
+
