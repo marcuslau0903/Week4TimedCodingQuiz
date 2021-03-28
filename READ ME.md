@@ -1,8 +1,7 @@
 # 04 Web APIs: Code Quiz
 
-## Objective: 
-
-    In this week's homework, we are required to build a timed coding quiz with multiple choice questions.  The webpage features a dynamically updated HTML and CSS powered by **JavaScript**.
+# Objective: 
+ In this week's homework, we are required to build a timed coding quiz with multiple choice questions.  The webpage features a dynamically updated HTML and CSS powered by **JavaScript**.
 
 ## Acceptance Criteria
 - [x] When clicked on the **start button** to start the code quiz, the **timer** starts to count down of 60 seconds and a question is presented to the user. 
