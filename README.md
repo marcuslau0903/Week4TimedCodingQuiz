@@ -1,7 +1,7 @@
 # 04 Web APIs: Code Quiz
 
-## Objective: 
- In this week's homework, we are required to build a timed coding quiz with multiple choice questions.  The webpage features a dynamically updated HTML and CSS powered by **JavaScript**.
+## Description: 
+ A timed coding quiz with multiple choice questions.  The webpage features a dynamically updated HTML and CSS powered by **JavaScript**.
 
  ## Link to deployed URL: 
  [https://marcuslau0903.github.io/Week4TimedCodingQuiz/]
@@ -24,3 +24,9 @@
 - [ ] A go back button which allows user to restart the game.
   
 - [ ] a clear score button which allows user to clear the scores.
+
+## Screen Shots
+
+![screenshot](./images/Capture.PNG)
+
+![screenshot2](./images/middle.PNG)

@@ -68,9 +68,9 @@ const startQuiz = () => {
     createQuestion(questionsArray[0])
     }
 
-const goBack = () => {
+// const goBack = () => {
 
-}
+// }
 
 const setTime = function() {
         const callback = function () {
