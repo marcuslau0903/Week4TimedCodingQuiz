@@ -1,12 +1,11 @@
 # 04 Web APIs: Code Quiz
 
-## Description: 
- A timed coding quiz with multiple choice questions.  The webpage features a dynamically updated HTML and CSS powered by **JavaScript**.
-
  ## Link to deployed URL: 
  [https://marcuslau0903.github.io/Week4TimedCodingQuiz/]
 
-## Acceptance Criteria
+## Description: 
+ A timed coding quiz with multiple choice questions.  The webpage features a dynamically updated HTML and CSS powered by **JavaScript**.
+
 - [x] When clicked on the **start button** to start the code quiz, the **timer** starts to count down of 60 seconds and a question is presented to the user. 
 
 - [x] For each wrong answer, 5 seconds will be subtracted from the clock timer. 
